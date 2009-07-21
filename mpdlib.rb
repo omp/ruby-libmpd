@@ -17,4 +17,23 @@ class MPD
     @socket = TCPSocket.new @host, @port
     return @socket.gets.chomp
   end
+
+  def send_request command
+    # Escape backslashes in command.
+    @socket.puts command.sub('\\', '\\\\\\')
+    return get_response
+  end
+
+  def get_response
+    response = String.new
+
+    while true
+      line = @socket.gets
+
+      return response if line == "OK\n"
+      return false if line =~ /^ACK/
+
+      response << line
+    end
+  end
 end
