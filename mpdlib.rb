@@ -89,4 +89,12 @@ class MPD
   def seek songpos, time
     return send_request 'seek %s %s' % [songpos, time]
   end
+
+  def add uri
+    return send_request 'add "%s"' % uri
+  end
+
+  def delete songpos
+    return send_request 'delete ' + songpos.to_s
+  end
 end
