@@ -45,5 +45,7 @@ class MPD
       field, value = line.split(': ')
       hash[field] = value
     end
+
+    return hash
   end
 end
