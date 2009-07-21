@@ -48,4 +48,28 @@ class MPD
 
     return hash
   end
+
+  def status
+    response = send_request('status')
+    hash = Hash.new
+
+    response.split("\n").each do |line|
+      field, value = line.split(': ')
+      hash[field] = value
+    end
+
+    return hash
+  end
+
+  def stats
+    response = send_request('stats')
+    hash = Hash.new
+
+    response.split("\n").each do |line|
+      field, value = line.split(': ')
+      hash[field] = value
+    end
+
+    return hash
+  end
 end
