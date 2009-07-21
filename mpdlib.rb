@@ -63,6 +63,21 @@ class MPD
     return generate_hash send_request 'stats'
   end
 
+  def play songpos=false
+    command = 'play'
+    command << ' ' + songpos.to_s if songpos
+
+    return send_request command
+  end
+
+  def pause pause
+    return send_request 'pause ' + pause.to_s
+  end
+
+  def stop
+    return send_request 'stop'
+  end
+
   def next
     return send_request 'next'
   end
