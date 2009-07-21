@@ -20,7 +20,7 @@ class MPD
 
   def send_request command
     # Escape backslashes in command.
-    @socket.puts command.sub('\\', '\\\\\\')
+    @socket.puts command.gsub('\\', '\\\\\\')
     return get_response
   end
 
