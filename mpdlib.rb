@@ -85,4 +85,8 @@ class MPD
   def previous
     return send_request 'previous'
   end
+
+  def seek songpos, time
+    return send_request 'seek %s %s' % [songpos, time]
+  end
 end
