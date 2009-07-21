@@ -36,4 +36,14 @@ class MPD
       response << line
     end
   end
+
+  def currentsong
+    response = send_request('currentsong')
+    hash = Hash.new
+
+    response.split("\n").each do |line|
+      field, value = line.split(': ')
+      hash[field] = value
+    end
+  end
 end
