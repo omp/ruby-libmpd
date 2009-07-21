@@ -37,39 +37,26 @@ class MPD
     end
   end
 
-  def currentsong
-    response = send_request('currentsong')
+  def generate_hash str
     hash = Hash.new
 
-    response.split("\n").each do |line|
+    str.split("\n").each do |line|
       field, value = line.split(': ')
       hash[field] = value
     end
 
     return hash
+  end
+
+  def currentsong
+    return generate_hash send_request 'currentsong'
   end
 
   def status
-    response = send_request('status')
-    hash = Hash.new
-
-    response.split("\n").each do |line|
-      field, value = line.split(': ')
-      hash[field] = value
-    end
-
-    return hash
+    return generate_hash send_request 'status'
   end
 
   def stats
-    response = send_request('stats')
-    hash = Hash.new
-
-    response.split("\n").each do |line|
-      field, value = line.split(': ')
-      hash[field] = value
-    end
-
-    return hash
+    return generate_hash send_request 'stats'
   end
 end
