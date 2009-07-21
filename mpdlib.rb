@@ -59,4 +59,12 @@ class MPD
   def stats
     return generate_hash send_request 'stats'
   end
+
+  def next
+    return send_request 'next'
+  end
+
+  def previous
+    return send_request 'previous'
+  end
 end
