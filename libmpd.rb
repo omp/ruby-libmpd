@@ -34,14 +34,11 @@ class MPD
     while true
       line = @socket.gets
 
-      break if line == "OK\n"
+      return response if line == "OK\n"
       return false if line =~ /^ACK/
 
       response << line
     end
-
-    return true if response.empty?
-    return response
   end
 
   def generate_hash str
