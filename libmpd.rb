@@ -68,10 +68,19 @@ class MPD
   end
 
   # Begins playing the playlist. If argument is supplied, begin at specified
-  # position.
+  # song position.
   def play songpos=false
     command = 'play'
     command << ' ' + songpos.to_s if songpos
+
+    return send_request command
+  end
+
+  # Begins playing the playlist. If argument is supplied, begin at specified
+  # song id.
+  def playid songid=false
+    command = 'playid'
+    command << ' ' + songid.to_s if songid
 
     return send_request command
   end
@@ -99,6 +108,11 @@ class MPD
   # Seeks to the given position of the given song.
   def seek songpos, time
     return send_request 'seek %s %s' % [songpos, time]
+  end
+
+  # Seeks to the given position of the given song id.
+  def seekid songid, time
+    return send_request 'seekid %s %s' % [songid, time]
   end
 
   # Adds the specified file to the playlist. (Directories add recursively.)
