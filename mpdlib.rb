@@ -97,4 +97,18 @@ class MPD
   def delete songpos
     return send_request 'delete ' + songpos.to_s
   end
+
+  def clear
+    return send_request 'clear'
+  end
+
+  # Not yet complete.
+  def playlistinfo
+    playlist = send_request 'playlistinfo'
+    playlist = playlist.split(/(?!\n)(?=file:)/).map do |song|
+      generate_hash song
+    end
+
+    return playlist
+  end
 end
