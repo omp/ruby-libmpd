@@ -142,6 +142,38 @@ class MPD
     return split_and_hash send_request 'search %s "%s"' % [type, what]
   end
 
+  # Sets consume state. When consume is activated, each song played is
+  # removed from playlist.
+  def consume state
+    return send_request 'consume ' + state.to_s
+  end
+
+  # Sets crossfading between songs.
+  def crossfade seconds
+    return send_request 'crossfade ' + seconds.to_s
+  end
+
+  # Sets random state.
+  def random state
+    return send_request 'random ' + state.to_s
+  end
+
+  # Sets repeat state.
+  def repeat state
+    return send_request 'repeat ' + state.to_s
+  end
+
+  # Sets volume from a range of 0-100.
+  def setvol volume
+    return send_request 'setvol ' + volume.to_s
+  end
+
+  # Sets single state. When single is activated, playback is stopped after
+  # current song, or song is repeated if the 'repeat' mode is enabled.
+  def single state
+    return send_request 'single ' + state.to_s
+  end
+
   private :generate_hash
   private :get_response
   private :split_and_hash
