@@ -144,6 +144,5 @@ class MPD
 
   private :generate_hash
   private :get_response
-  private :send_request
   private :split_and_hash
 end
