@@ -102,13 +102,24 @@ class MPD
     return send_request 'clear'
   end
 
-  # Not yet complete.
-  def playlistinfo
-    playlist = send_request 'playlistinfo'
-    playlist = playlist.split(/(?!\n)(?=file:)/).map do |song|
+  def split_and_hash str
+    songs = str.split(/(?!\n)(?=file:)/).map do |song|
       generate_hash song
     end
 
-    return playlist
+    return songs
+  end
+
+  # Not yet complete.
+  def playlistinfo
+    return split_and_hash send_request 'playlistinfo'
+  end
+
+  def find type, what
+    return split_and_hash send_request 'find %s "%s"' % [type, what]
+  end
+
+  def search type, what
+    return split_and_hash send_request 'search %s "%s"' % [type, what]
   end
 end
