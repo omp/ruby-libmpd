@@ -49,7 +49,7 @@ class MPD
 
     str.split("\n").each do |line|
       field, value = line.split(': ')
-      hash[field.downcase.to_sym] = value
+      hash[field] = value
     end
 
     return hash
