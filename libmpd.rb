@@ -6,6 +6,20 @@
 
 require 'socket'
 
+class TrueClass
+  # Return integer 1.
+  def to_i
+    return 1
+  end
+end
+
+class FalseClass
+  # Return integer 0.
+  def to_i
+    return 0
+  end
+end
+
 class MPD
   # Initialise an MPD object with the specified host and port.
   #
@@ -85,7 +99,7 @@ class MPD
     return send_request command
   end
 
-  # Toggles pause. (1 = pause, 0 = play)
+  # Toggles pause.
   def pause pause
     return send_request 'pause ' + pause.to_s
   end
