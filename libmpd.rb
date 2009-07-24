@@ -237,6 +237,34 @@ class MPD
     return false
   end
 
+  # Returns +true+ if consume is activated.
+  # Otherwise, returns +false+.
+  def consume?
+    return true if status[:consume] == '1'
+    return false
+  end
+
+  # Returns +true+ if random is activated.
+  # Otherwise, returns +false+.
+  def random?
+    return true if status[:random] == '1'
+    return false
+  end
+
+  # Returns +true+ if repeat is activated.
+  # Otherwise, returns +false+.
+  def repeat?
+    return true if status[:repeat] == '1'
+    return false
+  end
+
+  # Returns +true+ if single is activated.
+  # Otherwise, returns +false+.
+  def single?
+    return true if status[:single] == '1'
+    return false
+  end
+
   private :generate_hash
   private :get_response
   private :split_and_hash
