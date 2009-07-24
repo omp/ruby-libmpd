@@ -29,7 +29,7 @@ module MPDPlaybackOptions
 
   # Sets crossfading between songs.
   def crossfade seconds
-    return send_request 'crossfade ' + seconds.to_s
+    return send_request 'crossfade %s' % seconds
   end
 
   # Returns the current crossfade setting as an integer.
@@ -69,7 +69,7 @@ module MPDPlaybackOptions
 
   # Sets volume from a range of 0 to 100.
   def volume volume
-    return send_request 'setvol ' + volume.to_s
+    return send_request 'setvol %s' % volume
   end
 
   # Returns the current volume as an integer.
