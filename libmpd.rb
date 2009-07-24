@@ -99,9 +99,12 @@ class MPD
     return send_request command
   end
 
-  # Toggles pause.
-  def pause pause
-    return send_request 'pause ' + pause.to_s
+  # Sets pause state.
+  #
+  # Accepts an argument of _true_ to enable or _false_ to disable.
+  # If no argument is given, defaults to _true_.
+  def pause pause=true
+    return send_request 'pause %s' % pause.to_i
   end
 
   # Stops playing.
