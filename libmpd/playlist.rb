@@ -27,4 +27,14 @@ module MPDPlaylist
   def playlistinfo
     return split_and_hash send_request 'playlistinfo'
   end
+
+  # Swaps the positions of the given songs, specified by playlist positions.
+  def swap first, second
+    return send_request 'swap %s %s' % [first, second]
+  end
+
+  # Swaps the positions of the given songs, specified by song ids.
+  def swapid first, second
+    return send_request 'swapid %s %s' % [first, second]
+  end
 end
