@@ -61,14 +61,9 @@ module MPDPlaybackControl
     return send_request('previous')
   end
 
-  # Seeks to the given position of the given song.
-  def seek(songpos, time)
-    return send_request('seek %s %s' % [songpos, time])
-  end
-
-  # Seeks to the given position of the given song id.
-  def seekid(songid, time)
-    return send_request('seekid %s %s' % [songid, time])
+  # Seeks to the given position of the current song.
+  def seek(time)
+    return send_request('seek %s %s' % [status[:song], time])
   end
 
   # Stops playing.
