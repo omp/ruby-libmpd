@@ -6,14 +6,14 @@
 
 require 'socket'
 
-class TrueClass
+class TrueClass # :nodoc:
   # Return integer 1.
   def to_i
     return 1
   end
 end
 
-class FalseClass
+class FalseClass # :nodoc:
   # Return integer 0.
   def to_i
     return 0
