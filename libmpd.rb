@@ -101,8 +101,8 @@ class MPD
   #
   # Accepts an argument of _true_ to enable or _false_ to disable.
   # If no argument is given, defaults to _true_.
-  def pause pause=true
-    return send_request 'pause %s' % pause.to_i
+  def pause state=true
+    return send_request 'pause %s' % state.to_i
   end
 
   # Stops playing.
