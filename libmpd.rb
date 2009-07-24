@@ -81,14 +81,6 @@ class MPD
     return songs
   end
 
-  # Returns an Array composed of Hashes containing information about the songs
-  # in the playlist.
-  #
-  # Not yet complete.
-  def playlistinfo
-    return split_and_hash send_request 'playlistinfo'
-  end
-
   # Find all songs in database with an exact match.
   def find type, what
     return split_and_hash send_request 'find %s "%s"' % [type, what]

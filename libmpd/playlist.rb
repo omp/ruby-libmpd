@@ -19,4 +19,12 @@ module MPDPlaylist
   def clear
     return send_request 'clear'
   end
+
+  # Returns an Array composed of Hashes containing information about the songs
+  # in the playlist.
+  #
+  # Not yet complete.
+  def playlistinfo
+    return split_and_hash send_request 'playlistinfo'
+  end
 end
