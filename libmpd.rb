@@ -5,6 +5,7 @@
 # See http://www.gnu.org/licenses/gpl.txt for the full license text.
 
 require 'socket'
+require 'libmpd/database'
 require 'libmpd/playbackcontrol'
 require 'libmpd/playbackoptions'
 require 'libmpd/playlist'
@@ -23,6 +24,7 @@ class FalseClass # :nodoc:
 end
 
 class MPD
+  include MPDDatabase
   include MPDPlaybackControl
   include MPDPlaybackOptions
   include MPDPlaylist
@@ -79,16 +81,6 @@ class MPD
     end
 
     return songs
-  end
-
-  # Find all songs in database with an exact match.
-  def find type, what
-    return split_and_hash send_request 'find %s "%s"' % [type, what]
-  end
-
-  # Searches the database.
-  def search type, what
-    return split_and_hash send_request 'search %s "%s"' % [type, what]
   end
 
   private :generate_hash
