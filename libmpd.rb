@@ -6,6 +6,7 @@
 
 require 'socket'
 require 'libmpd/playbackoptions'
+require 'libmpd/status'
 
 class TrueClass # :nodoc:
   def to_i
@@ -21,6 +22,7 @@ end
 
 class MPD
   include MPDPlaybackOptions
+  include MPDStatus
 
   # Initialise an MPD object with the specified host and port.
   #
@@ -65,21 +67,6 @@ class MPD
     end
 
     return hash
-  end
-
-  # Returns a Hash containing information about the current song.
-  def currentsong
-    return generate_hash send_request 'currentsong'
-  end
-
-  # Returns a Hash containing the current status.
-  def status
-    return generate_hash send_request 'status'
-  end
-
-  # Returns a Hash containing statistics.
-  def stats
-    return generate_hash send_request 'stats'
   end
 
   # Begins playing the playlist. If argument is supplied, begin at specified
