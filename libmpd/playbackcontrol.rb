@@ -11,55 +11,42 @@
 
 # Collection of methods related to playback control.
 module MPDPlaybackControl
-  # Begins playing the playlist. If argument is supplied, begin at specified
-  # song position.
-  def play songpos=false
-    command = 'play'
-    command << ' ' + songpos.to_s if songpos
-
-    return send_request command
-  end
-
-  # Begins playing the playlist. If argument is supplied, begin at specified
-  # song id.
-  def playid songid=false
-    command = 'playid'
-    command << ' ' + songid.to_s if songid
-
-    return send_request command
+  # Plays the next song in the playlist.
+  def next
+    return send_request('next')
   end
 
   # Sets pause state.
   #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
-  def pause state=true
-    return send_request 'pause %s' % state.to_i
+  # Accepts an argument of +true+ to enable or +false+ to disable.
+  # If no argument is given, defaults to +true+.
+  def pause(state=true)
+    return send_request('pause %s' % state.to_i)
   end
 
-  # Stops playing.
-  def stop
-    return send_request 'stop'
+  # Returns +true+ if paused.
+  # Otherwise, returns +false+.
+  def paused?
+    return true if status[:state] == 'pause'
+    return false
   end
 
-  # Plays next song in the playlist.
-  def next
-    return send_request 'next'
+  # Begins playing the playlist. If an argument is given, begins at the
+  # specified song position.
+  def play(songpos=false)
+    command = 'play'
+    command << ' %s' % songpos if songpos
+
+    return send_request(command)
   end
 
-  # Plays previous song in the playlist.
-  def previous
-    return send_request 'previous'
-  end
+  # Begins playing the playlist. If an argument is given, begins at the
+  # specified song id.
+  def playid(songid=false)
+    command = 'playid'
+    command << ' %s' % songid if songid
 
-  # Seeks to the given position of the given song.
-  def seek songpos, time
-    return send_request 'seek %s %s' % [songpos, time]
-  end
-
-  # Seeks to the given position of the given song id.
-  def seekid songid, time
-    return send_request 'seekid %s %s' % [songid, time]
+    return send_request(command)
   end
 
   # Returns +true+ if playing.
@@ -69,11 +56,24 @@ module MPDPlaybackControl
     return false
   end
 
-  # Returns +true+ if paused.
-  # Otherwise, returns +false+.
-  def paused?
-    return true if status[:state] == 'pause'
-    return false
+  # Plays the previous song in the playlist.
+  def previous
+    return send_request('previous')
+  end
+
+  # Seeks to the given position of the given song.
+  def seek(songpos, time)
+    return send_request('seek %s %s' % [songpos, time])
+  end
+
+  # Seeks to the given position of the given song id.
+  def seekid(songid, time)
+    return send_request('seekid %s %s' % [songid, time])
+  end
+
+  # Stops playing.
+  def stop
+    return send_request('stop')
   end
 
   # Returns +true+ if stopped.
