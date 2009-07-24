@@ -14,56 +14,10 @@ module MPDPlaybackOptions
   # Sets consume state.
   # When consume is activated, each song played is removed from the playlist.
   #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
+  # Accepts an argument of +true+ to enable or +false+ to disable.
+  # If no argument is given, defaults to +true+.
   def consume state=true
     return send_request 'consume %s' % state.to_i
-  end
-
-  # Sets crossfading between songs.
-  def crossfade seconds
-    return send_request 'crossfade ' + seconds.to_s
-  end
-
-  # Sets random state.
-  #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
-  def random state=true
-    return send_request 'random %s' % state.to_i
-  end
-
-  # Sets repeat state.
-  #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
-  def repeat state=true
-    return send_request 'repeat %s' % state.to_i
-  end
-
-  # Sets volume from a range of 0-100.
-  def volume volume
-    return send_request 'setvol ' + volume.to_s
-  end
-
-  # Returns the current volume as an integer.
-  def volume?
-    return status[:volume].to_i
-  end
-
-  # Returns the current crossfade setting as an integer.
-  def crossfade?
-    return status[:xfade].to_i
-  end
-
-  # Sets single state.
-  # When single is activated, playback is stopped after the current song. If
-  # repeat is also activated, the current song is repeated.
-  #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
-  def single state=true
-    return send_request 'single %s' % state.to_i
   end
 
   # Returns +true+ if consume is activated.
@@ -73,6 +27,24 @@ module MPDPlaybackOptions
     return false
   end
 
+  # Sets crossfading between songs.
+  def crossfade seconds
+    return send_request 'crossfade ' + seconds.to_s
+  end
+
+  # Returns the current crossfade setting as an integer.
+  def crossfade?
+    return status[:xfade].to_i
+  end
+
+  # Sets random state.
+  #
+  # Accepts an argument of +true+ to enable or +false+ to disable.
+  # If no argument is given, defaults to +true+.
+  def random state=true
+    return send_request 'random %s' % state.to_i
+  end
+
   # Returns +true+ if random is activated.
   # Otherwise, returns +false+.
   def random?
@@ -80,11 +52,39 @@ module MPDPlaybackOptions
     return false
   end
 
+  # Sets repeat state.
+  #
+  # Accepts an argument of +true+ to enable or +false+ to disable.
+  # If no argument is given, defaults to +true+.
+  def repeat state=true
+    return send_request 'repeat %s' % state.to_i
+  end
+
   # Returns +true+ if repeat is activated.
   # Otherwise, returns +false+.
   def repeat?
     return true if status[:repeat] == '1'
     return false
+  end
+
+  # Sets volume from a range of 0 to 100.
+  def volume volume
+    return send_request 'setvol ' + volume.to_s
+  end
+
+  # Returns the current volume as an integer.
+  def volume?
+    return status[:volume].to_i
+  end
+
+  # Sets single state.
+  # When single is activated, playback is stopped after the current song. If
+  # repeat is also activated, the current song is repeated.
+  #
+  # Accepts an argument of +true+ to enable or +false+ to disable.
+  # If no argument is given, defaults to +true+.
+  def single state=true
+    return send_request 'single %s' % state.to_i
   end
 
   # Returns +true+ if single is activated.
