@@ -7,6 +7,7 @@
 require 'socket'
 require 'libmpd/playbackcontrol'
 require 'libmpd/playbackoptions'
+require 'libmpd/playlist'
 require 'libmpd/status'
 
 class TrueClass # :nodoc:
@@ -24,6 +25,7 @@ end
 class MPD
   include MPDPlaybackControl
   include MPDPlaybackOptions
+  include MPDPlaylist
   include MPDStatus
 
   # Initialise an MPD object with the specified host and port.
@@ -69,21 +71,6 @@ class MPD
     end
 
     return hash
-  end
-
-  # Adds the specified file to the playlist. (Directories add recursively.)
-  def add uri
-    return send_request 'add "%s"' % uri
-  end
-
-  # Deletes a song from the playlist.
-  def delete songpos
-    return send_request 'delete ' + songpos.to_s
-  end
-
-  # Clears the playlist.
-  def clear
-    return send_request 'clear'
   end
 
   def split_and_hash str
