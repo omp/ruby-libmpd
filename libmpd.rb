@@ -1,8 +1,13 @@
 #!/usr/bin/env ruby
 #
+#--
 # Copyright 2009 David Vazgenovich Shakaryan <dvshakaryan@gmail.com>
 # Distributed under the terms of the GNU General Public License v3.
 # See http://www.gnu.org/licenses/gpl.txt for the full license text.
+#++
+#
+# *Author*:: David Vazgenovich Shakaryan
+# *License*:: GNU General Public License v3
 
 require 'socket'
 require 'libmpd/database'
@@ -23,6 +28,7 @@ class FalseClass # :nodoc:
   end
 end
 
+# Class for connecting and communicating with the daemon.
 class MPD
   include MPDDatabase
   include MPDPlaybackControl

@@ -1,9 +1,15 @@
 #!/usr/bin/env ruby
 #
+#--
 # Copyright 2009 David Vazgenovich Shakaryan <dvshakaryan@gmail.com>
 # Distributed under the terms of the GNU General Public License v3.
 # See http://www.gnu.org/licenses/gpl.txt for the full license text.
+#++
+#
+# *Author*:: David Vazgenovich Shakaryan
+# *License*:: GNU General Public License v3
 
+# Collection of methods related to the playlist.
 module MPDPlaylist
   # Adds the specified file to the playlist. (Directories add recursively.)
   def add uri
