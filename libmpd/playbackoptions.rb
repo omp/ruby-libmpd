@@ -36,8 +36,18 @@ module MPDPlaybackOptions
   end
 
   # Sets volume from a range of 0-100.
-  def setvol volume
+  def volume volume
     return send_request 'setvol ' + volume.to_s
+  end
+
+  # Returns the current volume as an integer.
+  def volume?
+    return status[:volume].to_i
+  end
+
+  # Returns the current crossfade setting as an integer.
+  def crossfade?
+    return status[:xfade].to_i
   end
 
   # Sets single state.
