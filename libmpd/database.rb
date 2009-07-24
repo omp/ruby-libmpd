@@ -5,13 +5,28 @@
 # See http://www.gnu.org/licenses/gpl.txt for the full license text.
 
 module MPDDatabase
-  # Find all songs in database with an exact match.
-  def find type, what
-    return split_and_hash send_request 'find %s "%s"' % [type, what]
+  # Finds all songs in the database where _field_ is _value_.
+  # Matching is case-sensitive.
+  #
+  # Possible field names: album, artist, title.
+  def find field, value
+    return split_and_hash send_request 'find %s "%s"' % [field, value]
   end
 
-  # Searches the database.
-  def search type, what
-    return split_and_hash send_request 'search %s "%s"' % [type, what]
+  # Finds all songs in the database where _field_ contains _value_.
+  # Matching is not case-sensitive.
+  #
+  # Possible field names: album, artist, filename, title.
+  def search field, value
+    return split_and_hash send_request 'search %s "%s"' % [field, value]
+  end
+
+  # Updates the database.
+  # If an argument is given, update that particular file or directory.
+  def update uri=nil
+    command = 'update'
+    command << ' "%s"' % uri if uri
+
+    return send_request command
   end
 end
