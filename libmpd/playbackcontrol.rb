@@ -33,7 +33,7 @@ module MPDPlaybackControl
 
   # Begins playing the playlist. If an argument is given, begins at the
   # specified song position.
-  def play(songpos=false)
+  def play(songpos=nil)
     command = 'play'
     command << ' %s' % songpos if songpos
 
@@ -42,7 +42,7 @@ module MPDPlaybackControl
 
   # Begins playing the playlist. If an argument is given, begins at the
   # specified song id.
-  def playid(songid=false)
+  def playid(songid=nil)
     command = 'playid'
     command << ' %s' % songid if songid
 
