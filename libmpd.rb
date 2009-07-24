@@ -5,6 +5,7 @@
 # See http://www.gnu.org/licenses/gpl.txt for the full license text.
 
 require 'socket'
+require 'libmpd/playbackoptions'
 
 class TrueClass # :nodoc:
   def to_i
@@ -19,6 +20,8 @@ class FalseClass # :nodoc:
 end
 
 class MPD
+  include MPDPlaybackOptions
+
   # Initialise an MPD object with the specified host and port.
   #
   # The default host is "localhost" and the default port is 6600.
@@ -171,51 +174,6 @@ class MPD
     return split_and_hash send_request 'search %s "%s"' % [type, what]
   end
 
-  # Sets consume state.
-  # When consume is activated, each song played is removed from the playlist.
-  #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
-  def consume state=true
-    return send_request 'consume %s' % state.to_i
-  end
-
-  # Sets crossfading between songs.
-  def crossfade seconds
-    return send_request 'crossfade ' + seconds.to_s
-  end
-
-  # Sets random state.
-  #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
-  def random state=true
-    return send_request 'random %s' % state.to_i
-  end
-
-  # Sets repeat state.
-  #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
-  def repeat state=true
-    return send_request 'repeat %s' % state.to_i
-  end
-
-  # Sets volume from a range of 0-100.
-  def setvol volume
-    return send_request 'setvol ' + volume.to_s
-  end
-
-  # Sets single state.
-  # When single is activated, playback is stopped after the current song. If
-  # repeat is also activated, the current song is repeated.
-  #
-  # Accepts an argument of _true_ to enable or _false_ to disable.
-  # If no argument is given, defaults to _true_.
-  def single state=true
-    return send_request 'single %s' % state.to_i
-  end
-
   # Returns +true+ if playing.
   # Otherwise, returns +false+.
   def playing?
@@ -234,34 +192,6 @@ class MPD
   # Otherwise, returns +false+.
   def stopped?
     return true if status[:state] == 'stop'
-    return false
-  end
-
-  # Returns +true+ if consume is activated.
-  # Otherwise, returns +false+.
-  def consume?
-    return true if status[:consume] == '1'
-    return false
-  end
-
-  # Returns +true+ if random is activated.
-  # Otherwise, returns +false+.
-  def random?
-    return true if status[:random] == '1'
-    return false
-  end
-
-  # Returns +true+ if repeat is activated.
-  # Otherwise, returns +false+.
-  def repeat?
-    return true if status[:repeat] == '1'
-    return false
-  end
-
-  # Returns +true+ if single is activated.
-  # Otherwise, returns +false+.
-  def single?
-    return true if status[:single] == '1'
     return false
   end
 
