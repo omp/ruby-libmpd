@@ -16,8 +16,8 @@ module MPDPlaybackOptions
   #
   # Accepts an argument of +true+ to enable or +false+ to disable.
   # If no argument is given, defaults to +true+.
-  def consume state=true
-    return send_request 'consume %s' % state.to_i
+  def consume(state=true)
+    return send_request('consume %s' % state.to_i)
   end
 
   # Returns +true+ if consume is activated.
@@ -28,8 +28,8 @@ module MPDPlaybackOptions
   end
 
   # Sets crossfading between songs.
-  def crossfade seconds
-    return send_request 'crossfade %s' % seconds
+  def crossfade(seconds)
+    return send_request('crossfade %s' % seconds)
   end
 
   # Returns the current crossfade setting as an integer.
@@ -41,8 +41,8 @@ module MPDPlaybackOptions
   #
   # Accepts an argument of +true+ to enable or +false+ to disable.
   # If no argument is given, defaults to +true+.
-  def random state=true
-    return send_request 'random %s' % state.to_i
+  def random(state=true)
+    return send_request('random %s' % state.to_i)
   end
 
   # Returns +true+ if random is activated.
@@ -56,8 +56,8 @@ module MPDPlaybackOptions
   #
   # Accepts an argument of +true+ to enable or +false+ to disable.
   # If no argument is given, defaults to +true+.
-  def repeat state=true
-    return send_request 'repeat %s' % state.to_i
+  def repeat(state=true)
+    return send_request('repeat %s' % state.to_i)
   end
 
   # Returns +true+ if repeat is activated.
@@ -68,8 +68,8 @@ module MPDPlaybackOptions
   end
 
   # Sets volume from a range of 0 to 100.
-  def volume volume
-    return send_request 'setvol %s' % volume
+  def volume(volume)
+    return send_request('setvol %s' % volume)
   end
 
   # Returns the current volume as an integer.
@@ -83,8 +83,8 @@ module MPDPlaybackOptions
   #
   # Accepts an argument of +true+ to enable or +false+ to disable.
   # If no argument is given, defaults to +true+.
-  def single state=true
-    return send_request 'single %s' % state.to_i
+  def single(state=true)
+    return send_request('single %s' % state.to_i)
   end
 
   # Returns +true+ if single is activated.
