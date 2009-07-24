@@ -7,14 +7,12 @@
 require 'socket'
 
 class TrueClass # :nodoc:
-  # Return integer 1.
   def to_i
     return 1
   end
 end
 
 class FalseClass # :nodoc:
-  # Return integer 0.
   def to_i
     return 0
   end
