@@ -171,10 +171,13 @@ class MPD
     return split_and_hash send_request 'search %s "%s"' % [type, what]
   end
 
-  # Sets consume state. When consume is activated, each song played is
-  # removed from playlist.
-  def consume state
-    return send_request 'consume ' + state.to_s
+  # Sets consume state.
+  # When consume is activated, each song played is removed from the playlist.
+  #
+  # Accepts an argument of _true_ to enable or _false_ to disable.
+  # If no argument is given, defaults to _true_.
+  def consume state=true
+    return send_request 'consume %s' % state.to_i
   end
 
   # Sets crossfading between songs.
@@ -183,13 +186,19 @@ class MPD
   end
 
   # Sets random state.
-  def random state
-    return send_request 'random ' + state.to_s
+  #
+  # Accepts an argument of _true_ to enable or _false_ to disable.
+  # If no argument is given, defaults to _true_.
+  def random state=true
+    return send_request 'random %s' % state.to_i
   end
 
   # Sets repeat state.
-  def repeat state
-    return send_request 'repeat ' + state.to_s
+  #
+  # Accepts an argument of _true_ to enable or _false_ to disable.
+  # If no argument is given, defaults to _true_.
+  def repeat state=true
+    return send_request 'repeat %s' % state.to_i
   end
 
   # Sets volume from a range of 0-100.
@@ -197,10 +206,14 @@ class MPD
     return send_request 'setvol ' + volume.to_s
   end
 
-  # Sets single state. When single is activated, playback is stopped after
-  # current song, or song is repeated if the 'repeat' mode is enabled.
-  def single state
-    return send_request 'single ' + state.to_s
+  # Sets single state.
+  # When single is activated, playback is stopped after the current song. If
+  # repeat is also activated, the current song is repeated.
+  #
+  # Accepts an argument of _true_ to enable or _false_ to disable.
+  # If no argument is given, defaults to _true_.
+  def single state=true
+    return send_request 'single %s' % state.to_i
   end
 
   private :generate_hash
