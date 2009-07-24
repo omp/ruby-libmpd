@@ -216,6 +216,27 @@ class MPD
     return send_request 'single %s' % state.to_i
   end
 
+  # Returns +true+ if playing.
+  # Otherwise, returns +false+.
+  def playing?
+    return true if status[:state] == 'play'
+    return false
+  end
+
+  # Returns +true+ if paused.
+  # Otherwise, returns +false+.
+  def paused?
+    return true if status[:state] == 'pause'
+    return false
+  end
+
+  # Returns +true+ if stopped.
+  # Otherwise, returns +false+.
+  def stopped?
+    return true if status[:state] == 'stop'
+    return false
+  end
+
   private :generate_hash
   private :get_response
   private :split_and_hash
