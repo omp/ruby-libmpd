@@ -11,7 +11,7 @@
 
 # Collection of methods related to the status.
 module MPDStatus
-  # Clears the current error message in the status.
+  # Clears the error message in the status, if one exists.
   def clearerror
     return send_request('clearerror')
   end
@@ -21,13 +21,13 @@ module MPDStatus
     return generate_hash(send_request('currentsong'))
   end
 
+  # Returns daemon and database statistics.
+  def stats
+    return generate_hash(send_request('stats'))
+  end
+
   # Returns the status.
   def status
     return generate_hash(send_request('status'))
-  end
-
-  # Returns statistics.
-  def stats
-    return generate_hash(send_request('stats'))
   end
 end
