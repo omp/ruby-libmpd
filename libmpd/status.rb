@@ -11,17 +11,22 @@
 
 # Collection of methods related to the status.
 module MPDStatus
-  # Returns a Hash containing information about the current song.
-  def currentsong
+  # Clears the current error message in the status.
+  def clearerror
+    return send_request('clearerror')
+  end
+
+  # Returns information about the current song.
+  def current
     return generate_hash(send_request('currentsong'))
   end
 
-  # Returns a Hash containing the current status.
+  # Returns the status.
   def status
     return generate_hash(send_request('status'))
   end
 
-  # Returns a Hash containing statistics.
+  # Returns statistics.
   def stats
     return generate_hash(send_request('stats'))
   end
