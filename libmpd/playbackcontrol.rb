@@ -62,6 +62,7 @@ module MPDPlaybackControl
   end
 
   # Seeks to the given position of the current song.
+  # Accepts an argument of seconds.
   def seek(time)
     return send_request('seek %s %s' % [status[:song], time])
   end

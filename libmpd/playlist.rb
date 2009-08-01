@@ -11,36 +11,35 @@
 
 # Collection of methods related to the playlist.
 module MPDPlaylist
-  # Adds the specified file to the playlist. (Directories add recursively.)
-  def add uri
-    return send_request 'add "%s"' % uri
+  # Adds the specified file to the playlist.
+  # Directories add recursively.
+  def add(uri)
+    return send_request('add "%s"' % uri)
   end
 
   # Deletes a song from the playlist.
-  def delete songpos
-    return send_request 'delete ' + songpos.to_s
+  def delete(songpos)
+    return send_request('delete %s' % songpos)
   end
 
   # Clears the playlist.
   def clear
-    return send_request 'clear'
+    return send_request('clear')
   end
 
   # Returns an Array composed of Hashes containing information about the songs
   # in the playlist.
-  #
-  # Not yet complete.
-  def playlistinfo
-    return split_and_hash send_request 'playlistinfo'
+  def playlist
+    return split_and_hash(send_request('playlistinfo'))
   end
 
   # Swaps the positions of the given songs, specified by playlist positions.
   def swap first, second
-    return send_request 'swap %s %s' % [first, second]
+    return send_request('swap %s %s' % [first, second])
   end
 
   # Swaps the positions of the given songs, specified by song ids.
   def swapid first, second
-    return send_request 'swapid %s %s' % [first, second]
+    return send_request('swapid %s %s' % [first, second])
   end
 end

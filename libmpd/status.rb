@@ -13,16 +13,16 @@
 module MPDStatus
   # Returns a Hash containing information about the current song.
   def currentsong
-    return generate_hash send_request 'currentsong'
+    return generate_hash(send_request('currentsong'))
   end
 
   # Returns a Hash containing the current status.
   def status
-    return generate_hash send_request 'status'
+    return generate_hash(send_request('status'))
   end
 
   # Returns a Hash containing statistics.
   def stats
-    return generate_hash send_request 'stats'
+    return generate_hash(send_request('stats'))
   end
 end

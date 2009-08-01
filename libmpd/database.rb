@@ -13,31 +13,31 @@
 module MPDDatabase
   # Counts the number of songs in the database where _field_ is _value_, as
   # well as their total playtime.
-  def count field, value
-    return generate_hash send_request 'count %s "%s"' % [field, value]
+  def count(field, value)
+    return generate_hash(send_request('count %s "%s"' % [field, value]))
   end
 
   # Finds all songs in the database where _field_ is _value_.
   #
   # Possible field names: album, artist, title.
-  def find field, value
-    return split_and_hash send_request 'find %s "%s"' % [field, value]
+  def find(field, value)
+    return split_and_hash(send_request('find %s "%s"' % [field, value]))
   end
 
   # Finds all songs in the database where _field_ contains _value_.
   # Matching is not case-sensitive.
   #
   # Possible field names: album, artist, filename, title.
-  def search field, value
-    return split_and_hash send_request 'search %s "%s"' % [field, value]
+  def search(field, value)
+    return split_and_hash(send_request('search %s "%s"' % [field, value]))
   end
 
   # Updates the database.
   # If an argument is given, update that particular file or directory.
-  def update uri=nil
+  def update(uri=nil)
     command = 'update'
     command << ' "%s"' % uri if uri
 
-    return send_request command
+    return send_request(command)
   end
 end
