@@ -11,6 +11,21 @@
 
 # Collection of methods related to the database.
 module MPDDatabase
+  # Returns all directories.
+  # If an argument is specified, list all subdirectories of that directory.
+  def directories(uri=nil)
+    command = 'listall'
+    command << ' "%s"' % uri if uri
+
+    if uri
+      path = Regexp.escape(uri + '/')
+    else
+      path = String.new
+    end
+
+    return send_request(command).scan(/^directory: #{path}([^\/]+)\n/).flatten
+  end
+
   # Counts the number of songs in the database where _field_ is _value_, as
   # well as their total playtime.
   def count(field, value)
