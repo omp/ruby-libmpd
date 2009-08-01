@@ -17,6 +17,15 @@ module MPDPlaylist
     return send_request('add "%s"' % uri)
   end
 
+  # Adds the specified file to the playlist and returns the song id.
+  # An optional playlist position can be specified.
+  def addid(uri, position=nil)
+    command = 'addid "%s"' % uri
+    command << ' %s' % position if position
+
+    return send_request(command).scan(/(?!Id: )\d+/).first.to_i
+  end
+
   # Deletes a song from the playlist.
   def delete(songpos)
     return send_request('delete %s' % songpos)
