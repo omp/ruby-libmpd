@@ -36,6 +36,11 @@ module MPDPlaylist
     return send_request('delete %s' % songpos)
   end
 
+  # Deletes a song from the playlist.
+  def deleteid(songid)
+    return send_request('deleteid %s' % songid)
+  end
+
   # Returns an Array composed of Hashes containing information about the songs
   # in the playlist.
   def playlist
