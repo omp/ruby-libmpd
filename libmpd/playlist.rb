@@ -23,7 +23,7 @@ module MPDPlaylist
     command = 'addid "%s"' % uri
     command << ' %s' % position if position
 
-    return send_request(command).scan(/(?!Id: )\d+/).first.to_i
+    return send_request(command).scan(/\d+/).first.to_i
   end
 
   # Clears the playlist.
