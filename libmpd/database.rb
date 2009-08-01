@@ -23,7 +23,7 @@ module MPDDatabase
       path = String.new
     end
 
-    return send_request(command).scan(/^directory: #{path}([^\/]+)\n/).flatten
+    return send_request(command).scan(/^directory: #{path}([^\/]+?)\n/).flatten
   end
 
   # Counts the number of songs in the database where _field_ is _value_, as
@@ -37,6 +37,21 @@ module MPDDatabase
   # Possible field names: album, artist, title.
   def find(field, value)
     return split_and_hash(send_request('find %s "%s"' % [field, value]))
+  end
+
+  # Returns all files.
+  # If an argument is specified, list all files in that directory.
+  def files(uri=nil)
+    command = 'listall'
+    command << ' "%s"' % uri if uri
+
+    if uri
+      path = Regexp.escape(uri + '/')
+    else
+      path = String.new
+    end
+
+    return send_request(command).scan(/^file: #{path}([^\/]+?)\n/).flatten
   end
 
   # Finds all songs in the database where _field_ contains _value_.
