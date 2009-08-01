@@ -26,14 +26,14 @@ module MPDPlaylist
     return send_request(command).scan(/(?!Id: )\d+/).first.to_i
   end
 
-  # Deletes a song from the playlist.
-  def delete(songpos)
-    return send_request('delete %s' % songpos)
-  end
-
   # Clears the playlist.
   def clear
     return send_request('clear')
+  end
+
+  # Deletes a song from the playlist.
+  def delete(songpos)
+    return send_request('delete %s' % songpos)
   end
 
   # Returns an Array composed of Hashes containing information about the songs
