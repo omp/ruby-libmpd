@@ -44,13 +44,13 @@ class MPD
     @port = port
   end
 
-  # Connect to the server.
+  # Connects to the server.
   def connect
-    # Connect to MPD and return response.
     @socket = TCPSocket.new @host, @port
     return @socket.gets.chomp
   end
 
+  # Sends a command to the server and returns the response.
   def send_request command
     # Escape backslashes in command.
     @socket.puts command.gsub('\\', '\\\\\\')
