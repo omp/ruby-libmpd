@@ -9,12 +9,15 @@
 # *Author*:: David Vazgenovich Shakaryan
 # *License*:: GNU General Public License v3
 
+
 require 'socket'
-require 'libmpd/database'
-require 'libmpd/playbackcontrol'
-require 'libmpd/playbackoptions'
-require 'libmpd/playlist'
-require 'libmpd/status'
+
+MODULE_PATH = File.dirname(__FILE__) + '/libmpd/'
+require MODULE_PATH + 'database'
+require MODULE_PATH + 'playbackcontrol'
+require MODULE_PATH + 'playbackoptions'
+require MODULE_PATH + 'playlist'
+require MODULE_PATH + 'status'
 
 class TrueClass # :nodoc:
   def to_i
