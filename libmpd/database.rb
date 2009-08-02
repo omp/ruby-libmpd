@@ -14,7 +14,7 @@ module MPDDatabase
   # Returns all directories.
   # If an argument is specified, list all subdirectories of that directory.
   def directories(uri=nil)
-    command = 'listall'
+    command = 'lsinfo'
     command << ' "%s"' % uri if uri
 
     if uri
@@ -23,7 +23,7 @@ module MPDDatabase
       path = String.new
     end
 
-    return send_request(command).scan(/^directory: (#{path}[^\/]+?)\n/).flatten
+    return send_request(command).scan(/^directory: (#{path}.+?)\n/).flatten
   end
 
   # Counts the number of songs in the database where _field_ is _value_, as
@@ -42,7 +42,7 @@ module MPDDatabase
   # Returns all files.
   # If an argument is specified, list all files in that directory.
   def files(uri=nil)
-    command = 'listall'
+    command = 'lsinfo'
     command << ' "%s"' % uri if uri
 
     if uri
@@ -51,7 +51,7 @@ module MPDDatabase
       path = String.new
     end
 
-    return send_request(command).scan(/^file: (#{path}[^\/]+?)\n/).flatten
+    return send_request(command).scan(/^file: (#{path}.+?)\n/).flatten
   end
 
   # Finds all songs in the database where _field_ contains _value_.
