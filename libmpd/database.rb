@@ -51,7 +51,10 @@ module MPDDatabase
       path = String.new
     end
 
-    return send_request(command).scan(/^file: (#{path}.+?)\n/).flatten
+    files = send_request(command)
+    files = files.gsub(/^directory: .+?\n/, '').sub(/^playlist: .+/m, '')
+
+    return split_and_hash(files)
   end
 
   # Finds all songs in the database where _field_ contains _value_.
