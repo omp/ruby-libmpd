@@ -12,7 +12,7 @@
 
 require 'socket'
 
-MODULE_PATH = File.expand_path(File.dirname(__FILE__) + '/libmpd/')
+MODULE_PATH = File.expand_path(File.dirname(__FILE__)) + '/libmpd/'
 require MODULE_PATH + 'database'
 require MODULE_PATH + 'playbackcontrol'
 require MODULE_PATH + 'playbackoptions'
