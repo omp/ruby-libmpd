@@ -77,7 +77,7 @@ class MPD
     hash = Hash.new
 
     str.split("\n").each do |line|
-      field, value = line.split(': ')
+      field, value = line.split(': ', 2)
       hash[field.downcase.to_sym] = value
     end
 
