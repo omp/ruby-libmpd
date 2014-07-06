@@ -43,6 +43,8 @@ class MPD
   class Error < StandardError
   end
 
+  attr_accessor :host, :port
+
   # Initialise an MPD object with the specified host and port.
   #
   # The default host is "localhost" and the default port is 6600.
