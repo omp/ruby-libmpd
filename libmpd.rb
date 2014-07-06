@@ -37,6 +37,12 @@ class MPD
   include MPDPlaylist
   include MPDStatus
 
+  # Exception class used for MPD-related errors. At the moment, it is only
+  # raised when attempting to perform an operation without having connected
+  # first.
+  class Error < StandardError
+  end
+
   # Initialise an MPD object with the specified host and port.
   #
   # The default host is "localhost" and the default port is 6600.
@@ -52,8 +58,18 @@ class MPD
     @socket.gets.chomp
   end
 
+  # Disconnects from the server.
+  def disconnect
+    ensure_connected
+
+    @socket.close
+    @socket = nil
+  end
+
   # Sends a command to the server and returns the response.
   def send_request(command)
+    ensure_connected
+
     # Escape backslashes in command.
     @socket.puts command.gsub('\\', '\\\\\\')
 
@@ -61,6 +77,10 @@ class MPD
   end
 
   private
+
+  def ensure_connected
+    raise MPD::Error, 'Not connected to server.' if @socket.nil?
+  end
 
   def get_response
     response = String.new
