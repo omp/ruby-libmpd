@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #
 #--
-# Copyright 2009 David Vazgenovich Shakaryan <dvshakaryan@gmail.com>
+# Copyright 2009-2014 David Vazgenovich Shakaryan <dvshakaryan@gmail.com>
 # Distributed under the terms of the GNU General Public License v3.
 # See http://www.gnu.org/licenses/gpl.txt for the full license text.
 #++
@@ -13,7 +13,7 @@
 module MPDDatabase
   # Returns all directories.
   # If an argument is specified, list all subdirectories of that directory.
-  def directories(uri=nil)
+  def directories(uri = nil)
     command = 'lsinfo'
     command << ' "%s"' % uri if uri
 
@@ -41,7 +41,7 @@ module MPDDatabase
 
   # Returns all files.
   # If an argument is specified, list all files in that directory.
-  def files(uri=nil)
+  def files(uri = nil)
     command = 'lsinfo'
     command << ' "%s"' % uri if uri
 
@@ -67,7 +67,7 @@ module MPDDatabase
 
   # Updates the database.
   # If an argument is given, update that particular file or directory.
-  def update(uri=nil)
+  def update(uri = nil)
     command = 'update'
     command << ' "%s"' % uri if uri
 
